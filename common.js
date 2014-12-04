@@ -1,17 +1,11 @@
 (function($, p$, p$$){
   var extensionID = 'backlog_attachment_alert';
 
-
-
-
   var contentArea = $('#bodyLeft');
   var submitButton = $('input[type="submit"], .submitbtn', contentArea);
   var addTicketForm = $('#AddIssueConfirm');
 
-
-
-
-  var $dummyDirect = $('<input class="submitbtn Btn-gray" value="★追加★" type="button"/>');
+  var $dummyDirect = $('<input class="submitbtn Btn-gray" value="追加" type="button"/>');
   var $direct = $('.submitbtn.direct');
   var directID = extensionID + '_direct';
   $dummyDirect.on('click', function(){
@@ -23,18 +17,12 @@
   $direct.attr('id', directID);
   $direct.hide();
 
-
-
-
   submitButton.on('click', function(){
     if ($(this).is('.direct')) {
       return;
     }
     return checkAddFiles($(this));
   });
-
-
-
 
   function checkAddFiles($btn){
     var $textarea = $btn.closest('form[enctype="multipart/form-data"]').find('textarea');
@@ -46,8 +34,5 @@
       return confirm('添付漏れはありませんか？');
     }
   };
-
-
-
 
 })(jQuery, $, $$);
