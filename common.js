@@ -1,38 +1,30 @@
-(function($, p$, p$$){
-  var extensionID = 'backlog_attachment_alert';
-
+(function($){
   var contentArea = $('#bodyLeft');
-  var submitButton = $('input[type="submit"], .submitbtn', contentArea);
   var addTicketForm = $('#AddIssueConfirm');
-
-  var $dummyDirect = $('<input class="submitbtn Btn-gray" value="追加" type="button"/>');
-  var $direct = $('.submitbtn.direct');
-  var directID = extensionID + '_direct';
-  $dummyDirect.on('click', function(){
-    if (checkAddFiles($(this))) {
-      p$(directID).simulate('click');
-    }
+  var addTickectButton = $('input[type="button"].submitbtn', contentArea);
+  addTickectButton.each(function(){
+    $(this).clone().removeClass('direct').addClass('clone').insertAfter($(this));
+    $(this).hide();
   });
-  $direct.after($dummyDirect);
-  $direct.attr('id', directID);
-  $direct.hide();
+  var submitButton = $('input[type="submit"], input.clone', contentArea);
 
   submitButton.on('click', function(){
-    if ($(this).is('.direct')) {
-      return;
-    }
-    return checkAddFiles($(this));
-  });
-
-  function checkAddFiles($btn){
-    var $textarea = $btn.closest('form[enctype="multipart/form-data"]').find('textarea');
-    var keyword = '';
-    $textarea.each(function(){
-      keyword += $(this).val();
-    });
+    var keyword = $(this).closest('form[enctype="multipart/form-data"]').find('textarea').val();
     if(/添付/.test(keyword)){
-      return confirm('添付漏れはありませんか？');
+      submitFlag = confirm('添付漏れはありませんか？');
+      if(submitFlag){
+        if($(this).hasClass('clone')){
+          $(this).prev('.direct').trigger('click');
+        }
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      if($(this).hasClass('clone')){
+        $(this).prev('.direct').trigger('click');
+      }
+      return true;
     }
-  };
-
-})(jQuery, $, $$);
+  })
+})(jQuery);

@@ -1,14 +1,10 @@
 {
   "name": "BacklogAttachmentAlert",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "manifest_version": 2,
   "description": "Backlog での添付漏れを確認する拡張",
-  "web_accessible_resources": [
-    "common.js",
-    "event.simulate.js"
-  ],
   "content_scripts": [ {
     "matches": [ "*://*.backlog.jp/*" ],
-    "js": [ "jquery.js", "content-script.js" ]
+    "js": [ "jquery.js", "common.js" ]
   } ]
 }
