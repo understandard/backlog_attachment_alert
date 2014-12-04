@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "Backlog での添付漏れを確認する拡張",
+  "web_accessible_resources": [
+    "common.js",
+    "event.simulate.js"
+  ],
   "content_scripts": [ {
     "matches": [ "*://*.backlog.jp/*" ],
-    "js": [ "jquery.js", "common.js" ]
+    "js": [ "jquery.js", "content-script.js" ]
   } ]
 }
