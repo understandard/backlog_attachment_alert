@@ -7,13 +7,15 @@
 
   var contentArea = $('#bodyLeft');
   var addTickectButton = $('input[type="button"].submitbtn', contentArea);
-  var submitButton = $('input[type="submit"]' + ', input.'+cls_clone , contentArea);
+  var submitButton;
 
   addTickectButton.each(function(){
     var $this = $(this);
     $this.clone().removeClass(cls_direct).addClass(cls_clone).insertAfter($this);
     $this.hide();
   });
+
+  submitButton = $('input[type="submit"]' + ', input.'+cls_clone , contentArea);
 
   submitButton.on('click', function(){
     var $this = $(this);
